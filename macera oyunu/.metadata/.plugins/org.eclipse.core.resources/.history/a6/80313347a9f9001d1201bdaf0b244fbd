@@ -1,0 +1,48 @@
+package location.normalLoc;
+
+import player.Inventory;
+import player.Player;
+
+public class SafeHouse extends NormalLoc{
+
+	public SafeHouse(Player player) {
+		super(player);
+	}
+
+	
+	@Override
+	public void onLocation() {
+		System.out.println("Güvenli bölgeye hoşgeldin. Buradan sağlığın full şekilde çıkarsın.");
+		setLocationName("güvenli bölge");
+		setLocationNumber(1);
+		
+		//character:
+		//1 --> samuray
+		//2 --> okçu
+		//3 --> şovalye
+		
+//		Inventory inventory = new Inventory();
+//		getPlayer().setInventory(inventory);
+//		getPlayer().getInventory().setFood(false);
+//		getPlayer().getInventory().setFirewood(false);
+//		getPlayer().getInventory().setWater(false);
+		
+		
+		System.out.print("❤ Mevcut sağlığın: ");
+		if(getPlayer().getCharacter()==1) {
+			getPlayer().setHealthy(21);
+		}
+		else if (getPlayer().getCharacter()==2) {
+			getPlayer().setHealthy(18);
+		}
+		else if (getPlayer().getCharacter()==3) {
+			getPlayer().setHealthy(24);
+		}
+		System.out.println(getPlayer().getHealthy());
+		
+		
+	}
+
+	
+	
+}

@@ -1,0 +1,34 @@
+package location.BattleLoc;
+
+import java.util.Scanner;
+
+import monster.Monster;
+import player.Player;
+
+public class River extends BattleLoc{
+	
+	Monster bear;
+
+	public River(Player player, Monster bear) {
+		super(player, bear);
+		this.bear = bear;
+	}
+
+	Scanner scanner = new Scanner(System.in);
+	
+	@Override
+	public void onLocation() throws Exception {
+		int mN = bear.monsterNumber();
+
+		System.out.println();
+		System.out.println("Dikkatli ol! Nehirde birden fazla ayı olabilir");
+		System.out.println("Ayıların üstesinden gelebilirsen nehirden su kazanarak çıkacağını unutma");
+		System.out.println("Fakat ayıların üstesinden gelemezsen ölürsün 💀");
+		scanner.nextLine();
+		battleLocation(bear, mN);
+	}
+
+
+	
+
+}

@@ -1,0 +1,70 @@
+package monster;
+
+import java.util.Random;
+
+public class Monster {
+	
+	private int damage;
+	static private int healthy;
+	private int money;
+	private String name;
+
+
+	public Monster() {
+	}
+
+	public Monster(int damage, int healthy, int money, String name) {
+		this.damage = damage;
+		Monster.healthy = healthy;
+		this.money = money;
+		this.name = name;
+	}
+	
+	
+	
+	public int getDamage() {
+		return damage;
+	}
+
+	public void setDamage(int damage) {
+		this.damage = damage;
+	}
+
+	
+	public int getHealthy() {
+		return healthy;
+	}
+
+	public void setHealthy(int healthy) {
+		Monster.healthy = healthy;
+	}
+
+	
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+	
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	
+	
+	public int monsterNumber() {
+		Random random = new Random();
+		int monsterNumber = random.nextInt(3);
+		return monsterNumber+1;
+	}
+	
+	
+	
+}

@@ -1,0 +1,66 @@
+package location.BattleLoc;
+
+import java.util.Scanner;
+
+import location.Location;
+import monster.Monster;
+import player.Inventory;
+import player.Player;
+
+public abstract class BattleLoc extends Location{
+
+	static Monster monster;
+	
+	
+	public BattleLoc() {}
+	
+	public BattleLoc(Player player, Monster monster) {
+		super(player);
+		this.monster = monster;
+		
+	}
+	
+	public abstract void onLocation() throws Exception;
+	
+	Scanner scanner = new Scanner(System.in);
+	
+	public void combat(Monster m) throws Exception {
+		
+		System.out.println();
+		System.out.println("Canavarın mevcut canı: " + m.getHealthy());
+		System.out.println("Senin mevcut canın: " + getPlayer().getHealthy());
+		scanner.nextLine();
+
+		while (m.getHealthy()>0&&getPlayer().getHealthy()>0) {
+			System.out.print(getPlayer().getName() + " saldırıyor   >>>>>>>>>>");
+			m.setHealthy(m.getHealthy()-getPlayer().getDamage());
+			if(m.getHealthy()<=0) {
+				System.out.print(" Canavarın kalan canı: 0");
+				System.out.println("   ----------   Senin kalan canın: " + getPlayer().getHealthy());
+				scanner.nextLine();
+			}else {
+				System.out.print(" Canavarın kalan canı: " + m.getHealthy());
+				System.out.println("   ----------   Senin kalan canın: " + getPlayer().getHealthy());
+				scanner.nextLine();
+			}
+			
+			if(m.getHealthy()<=0) {
+				System.out.print("TEBRİKLER");
+				break;
+			}
+			
+			System.out.print(m.getName() + " saldırıyor <<<<<<<<<<");
+			System.out.print(" Canavarın kalan canı: " + m.getHealthy());
+			getPlayer().setHealthy(getPlayer().getHealthy()-m.getDamage());
+			System.out.println("   ----------   Senin kalan canın: " + getPlayer().getHealthy());
+			scanner.nextLine();
+			
+			if (getPlayer().getHealthy()<=0) {
+				System.out.println("!!!!!!!!!!!!!!!!     💀    ÖLDÜNÜZ     💀    !!!!!!!!!!!!!!!!");
+				throw new Exception("ÖLDÜNÜZ. OYUN BİTTİ");
+			}
+		}
+	}
+	
+	
+}

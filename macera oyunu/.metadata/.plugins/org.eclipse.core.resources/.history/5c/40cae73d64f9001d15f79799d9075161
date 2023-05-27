@@ -1,0 +1,148 @@
+package location.BattleLoc;
+
+import java.util.Scanner;
+
+import monster.Monster;
+import monster.Zombie;
+import player.Inventory;
+import player.Player;
+
+public class Cave extends BattleLoc{
+	
+	Monster zombie;
+	
+	
+	public Cave() {}
+	
+	public Cave(Player player, Monster zombie) {
+		super(player, zombie);
+		this.zombie = zombie;
+		zombie.setDamage(zombie.getDamage()-getPlayer().getDefence());
+		if(zombie.getDamage()<0) {
+			zombie.setDamage(0);
+		}
+	}
+	
+	
+	Scanner scanner = new Scanner(System.in);
+	
+	@Override
+	public void onLocation() throws Exception {
+		
+		int mN = zombie.monsterNumber();
+		
+		System.out.println();
+		System.out.println("Dikkatli ol! Mağarada birden fazla zombi olabilir");
+		System.out.println("Zombilerin üstesinden gelebilirsen mağaradan yemek kazanarak çıkacağını unutma");
+		System.out.println("Fakat zombilerin üstesinden gelemezsen ölürsün 💀");
+		scanner.nextLine();
+
+		if(mN == 1) {
+			fightOrFlight(mN);
+			String savasYADAkac = scanner.nextLine();
+			switch (savasYADAkac) {
+			case "s": {
+				int counter = 0;
+				for(int i=0; i<mN; i++) {
+					zombie.setHealthy(10);
+					combat(zombie);
+					System.out.println(" ZOMBİ ÖLDÜ !");
+					counter ++;
+				}
+				
+				moneyEarnedFromZombies(counter);	
+				this.isFood();	
+				break;
+			}
+			case "k": {
+				selectLocation();
+				break;
+			}
+			default:
+				System.out.println("Yanlış seçim yaptın !!!");
+				onLocation();
+			}
+		}
+		
+		else if (mN == 2) {
+			fightOrFlight(mN);
+			String savasYADAkac = scanner.nextLine();
+			switch (savasYADAkac) {
+			case "s": {
+				int counter = 0;
+				for(int i=0; i<mN; i++) {
+					zombie.setHealthy(10);
+					combat(zombie);
+					System.out.println(" ZOMBİ ÖLDÜ !");
+					counter ++;
+				}
+				moneyEarnedFromZombies(counter);
+				this.isFood();
+				break;
+			}
+			case "k": {
+				selectLocation();
+				break;
+			}
+			default:
+				System.out.println("Yanlış seçim yaptın !!!");
+				onLocation();
+			}
+		}
+		
+		else if(mN == 3){
+			fightOrFlight(mN);
+			String savasYADAkac = scanner.nextLine();
+			switch (savasYADAkac) {
+			case "s": {
+				int counter = 0;
+				for(int i=0; i<mN; i++) {
+					zombie.setHealthy(10);
+					combat(zombie);
+					System.out.println(" ZOMBİ ÖLDÜ !");
+					counter ++;
+				}
+				moneyEarnedFromZombies(counter);
+				this.isFood();
+				break;
+			}
+			case "k": {
+				selectLocation();
+				break;
+			}
+			default:
+				System.out.println("Yanlış seçim yaptın !!!");
+				onLocation();
+			}
+		}
+	}
+	
+
+	public void fightOrFlight(int mN) {
+		System.out.println("Mağarada " + mN + " adet zombi görünüyor. " + mN +" tane zombiyle savaşabilecek misin yoksa kaçacak mısın ?");
+		System.out.println("Savaşmak istiyorsan s'ye bas, kaçmak istiyorsan k'ye bas");
+	}
+	
+	
+	public void isFood() {
+		if(getPlayer().getHealthy()>0) {
+			System.out.println("***** 🍗 KARŞINA ÇIKAN TÜM ZOMBİLERİ ÖLDÜRDÜN VE YEMEK KAZANDIN 🍗 *****");
+			Inventory inventory = new Inventory();
+			getPlayer().setInventory(inventory);
+			getPlayer().getInventory().setFood(true);
+		}
+	}
+	
+	
+	public void moneyEarnedFromZombies(int counter) {
+		System.out.println(counter + " adet zombiden kazandığın para: " + (zombie.getMoney()*counter));
+		getPlayer().setMoney((getPlayer().getMoney()+zombie.getMoney()*counter));
+		System.out.println("💲 Mevcut paran: " + getPlayer().getMoney());
+	}
+
+
+}
+
+
+
+

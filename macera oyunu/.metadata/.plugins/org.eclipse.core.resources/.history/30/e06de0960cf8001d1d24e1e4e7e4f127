@@ -1,0 +1,26 @@
+package location.BattleLoc;
+
+import monster.Monster;
+import player.Player;
+
+public class River extends BattleLoc{
+
+	public River(Player player, Monster bear) {
+		super(player, bear);
+	}
+
+	@Override
+	public void onLocation() {
+		
+	}
+
+	
+	
+	@Override
+	/////////public void combat() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+}

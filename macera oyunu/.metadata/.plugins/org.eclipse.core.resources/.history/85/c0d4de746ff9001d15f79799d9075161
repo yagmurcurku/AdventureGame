@@ -1,0 +1,44 @@
+package location.BattleLoc;
+
+import java.util.Scanner;
+
+import monster.Monster;
+import monster.Zombie;
+import player.Inventory;
+import player.Player;
+
+public class Cave extends BattleLoc{
+	
+	Monster zombie;
+	
+	
+	public Cave() {}
+	
+	public Cave(Player player, Monster zombie) {
+		super(player, zombie);
+		this.zombie = zombie;
+		zombie.setDamage(zombie.getDamage()-getPlayer().getDefence());
+		if(zombie.getDamage()<0) {
+			zombie.setDamage(0);
+		}
+	}
+	
+	
+	Scanner scanner = new Scanner(System.in);
+	
+	
+	public void onLocation() throws Exception {
+		onLocation(zombie);
+	}
+	
+
+	
+	
+	
+
+
+}
+
+
+
+

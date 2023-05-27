@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="location.NormalLoc"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="location.normalLoc.NormalLoc"/>
+    <fullyQualifiedTypeName name="game.Game"/>
+    <fullyQualifiedTypeName name="java.util.Random"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="javax.management.modelmbean.ModelMBeanInfoSupport"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="location.normalLoc.ToolStore"/>
+    <fullyQualifiedTypeName name="location.BattleLoc.Cave"/>
+    <fullyQualifiedTypeName name="player.Player"/>
+    <fullyQualifiedTypeName name="location.normalLoc.SafeHouse"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="monster.Zombie"/>
+    <fullyQualifiedTypeName name="location.BattleLoc.BattleLoc"/>
+    <fullyQualifiedTypeName name="monster.Vampire"/>
+    <fullyQualifiedTypeName name="location.BattleLoc.Forest"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="monster.Bear"/>
+    <fullyQualifiedTypeName name="location.BattleLoc.River"/>
+    <fullyQualifiedTypeName name="player.Inventory"/>
+    <fullyQualifiedTypeName name="location.Location"/>
+    <fullyQualifiedTypeName name="monster.Monster"/>
+</qualifiedTypeNameHistroy>

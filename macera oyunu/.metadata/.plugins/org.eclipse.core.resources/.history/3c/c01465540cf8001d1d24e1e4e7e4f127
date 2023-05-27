@@ -1,0 +1,61 @@
+package location.BattleLoc;
+
+import location.Location;
+import monster.Monster;
+import player.Inventory;
+import player.Player;
+
+public abstract class BattleLoc extends Location{
+
+	static Monster monster;
+	
+	
+	public BattleLoc() {}
+	
+	public BattleLoc(Player player, Monster monster) {
+		super(player);
+		this.monster = monster;
+		
+	}
+	
+	public abstract void onLocation() throws Exception;
+	
+	public static void combat(Monster monster) throws Exception {
+		System.out.println();
+		System.out.println("Zombinin mevcut canı: " + monster.getHealthy());
+		System.out.println("Senin mevcut canın: " + getPlayer().getHealthy());
+		scanner.nextLine();
+
+		while (zombie.getHealthy()>0&&getPlayer().getHealthy()>0) {
+			System.out.print("Saldırı sırası sende   >>>>>>>>>>");
+			zombie.setHealthy(zombie.getHealthy()-getPlayer().getDamage());
+			if(zombie.getHealthy()<=0) {
+				System.out.print(" Zombinin kalan canı: 0");
+				System.out.println("   ----------   Senin kalan canın: " + getPlayer().getHealthy());
+				scanner.nextLine();
+			}else {
+				System.out.print(" Zombinin kalan canı: " + zombie.getHealthy());
+				System.out.println("   ----------   Senin kalan canın: " + getPlayer().getHealthy());
+				scanner.nextLine();
+			}
+			
+			if(zombie.getHealthy()<=0) {
+				System.out.print("TEBRİKLER");
+				break;
+			}
+			
+			System.out.print("Saldırı sırası zombide <<<<<<<<<<");
+			System.out.print(" Zombinin kalan canı: " + zombie.getHealthy());
+			getPlayer().setHealthy(getPlayer().getHealthy()-zombie.getDamage());
+			System.out.println("   ----------   Senin kalan canın: " + getPlayer().getHealthy());
+			scanner.nextLine();
+			
+			if (getPlayer().getHealthy()<=0) {
+				System.out.println("!!!!!!!!!!!!!!!!     💀    ÖLDÜNÜZ     💀    !!!!!!!!!!!!!!!!");
+				throw new Exception("ÖLDÜNÜZ. OYUN BİTTİ");
+			}
+		}
+	}
+	
+	
+}

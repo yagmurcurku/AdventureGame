@@ -1,0 +1,28 @@
+package location.BattleLoc;
+
+import monster.Monster;
+import player.Player;
+
+public class Forest extends BattleLoc{
+	
+	public Forest() {}
+
+	public Forest(Player player, Monster vampire) {
+		super(player, vampire);
+	}
+
+	@Override
+	public void onLocation() {
+		
+	}
+
+	
+
+	//@Override
+	////////public void combat() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+}

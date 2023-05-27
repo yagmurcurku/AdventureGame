@@ -1,0 +1,215 @@
+package location.BattleLoc;
+
+import java.util.Scanner;
+
+import location.Location;
+import monster.Monster;
+import player.Inventory;
+import player.Player;
+
+public abstract class BattleLoc extends Location{
+
+	static Monster monster;
+	
+	
+	public BattleLoc() {}
+	
+	public BattleLoc(Player player, Monster monster) {
+		super(player);
+		this.monster = monster;
+	}
+	
+
+	Scanner scanner = new Scanner(System.in);
+	
+	
+	
+	public void onLocation(Monster m, int mN) throws Exception{
+		
+
+		if(mN == 1) {
+			fightOrFlight(mN, m);
+			String savasYADAkac = scanner.nextLine();
+			switch (savasYADAkac) {
+			case "s": {
+				int counter = 0;
+				//metod olacak
+				for(int i=0; i<mN; i++) {
+					m.setHealthy(10);
+					combat(m);
+					System.out.println(m.getName()+ " öldü !");
+					counter ++;
+				}
+				
+				moneyEarnedFromMonsters(counter, m);
+				if(m.getName().equals("Zombie")) {
+					this.isFood();
+				}
+				else if(m.getName().equals("Vampire")) {
+					this.isWater();
+				}
+				else if(m.getName().equals("Bear")) {
+					this.isFirewood();
+				}
+				break;
+			}
+			case "k": {
+				selectLocation();
+				break;
+			}
+			default:
+				System.out.println("Yanlış seçim yaptın !!!");
+				onLocation();
+			}
+		}
+		
+		else if (mN == 2) {
+			fightOrFlight(mN, m);
+			String savasYADAkac = scanner.nextLine();
+			switch (savasYADAkac) {
+			case "s": {
+				int counter = 0;
+				for(int i=0; i<mN; i++) {
+					m.setHealthy(10);
+					combat(m);
+					System.out.println(m.getName()+ " öldü !");
+					counter ++;
+				}
+				moneyEarnedFromMonsters(counter, m);
+				if(m.getName().equals("Zombie")) {
+					this.isFood();
+				}
+				else if(m.getName().equals("Vampire")) {
+					this.isWater();
+				}
+				else if(m.getName().equals("Bear")) {
+					this.isFirewood();
+				}
+				break;
+			}
+			case "k": {
+				selectLocation();
+				break;
+			}
+			default:
+				System.out.println("Yanlış seçim yaptın !!!");
+				onLocation();
+			}
+		}
+		
+		else if(mN == 3){
+			fightOrFlight(mN, m);
+			String savasYADAkac = scanner.nextLine();
+			switch (savasYADAkac) {
+			case "s": {
+				int counter = 0;
+				for(int i=0; i<mN; i++) {
+					m.setHealthy(10);
+					combat(m);
+					System.out.println(m.getName()+ " öldü !");
+					counter ++;
+				}
+				moneyEarnedFromMonsters(counter, m);
+				if(m.getName().equals("Zombie")) {
+					this.isFood();
+				}
+				else if(m.getName().equals("Vampire")) {
+					this.isWater();
+				}
+				else if(m.getName().equals("Bear")) {
+					this.isFirewood();
+				}
+				break;
+			}
+			case "k": {
+				System.out.println("👣 👣 👣 👣 👣 👣 👣 👣 👣 👣 👣 👣 👣 👣 👣 👣");
+				selectLocation();
+				break;
+			}
+			default:
+				System.out.println("Yanlış seçim yaptın !!!");
+				onLocation();
+			}
+		}
+	}
+	
+	
+	public void fightOrFlight(int mN, Monster m) {
+		System.out.println(mN + " adet " + m.getName() + " görünüyor. " + mN +" adet " + m.getName() + " ile savaşabilecek misin yoksa kaçacak mısın ?");
+		System.out.println("Savaşmak istiyorsan s'ye bas, kaçmak istiyorsan k'ye bas");
+	}
+	
+	
+	public void isFood() {
+		if(getPlayer().getHealthy()>0) {
+			System.out.println("***** 🍗 KARŞINA ÇIKAN TÜM ZOMBİLERİ ÖLDÜRDÜN VE YEMEK KAZANDIN 🍗 *****");
+			Inventory inventory = new Inventory();
+			getPlayer().setInventory(inventory);
+			getPlayer().getInventory().setFood(true);
+		}
+	}
+	public void isWater() {
+		if(getPlayer().getHealthy()>0) {
+			System.out.println("***** 🪵 KARŞINA ÇIKAN TÜM VAMPİRLERİ ÖLDÜRDÜN VE SU KAZANDIN 🪵 *****");
+			Inventory inventory = new Inventory();
+			getPlayer().setInventory(inventory);
+			getPlayer().getInventory().setWater(true);
+		}
+	}
+	public void isFirewood() {
+		if(getPlayer().getHealthy()>0) {
+			System.out.println("***** 💧 KARŞINA ÇIKAN TÜM AYILARI ÖLDÜRDÜN VE YAKACAK ODUN KAZANDIN 💧 *****");
+			Inventory inventory = new Inventory();
+			getPlayer().setInventory(inventory);
+			getPlayer().getInventory().setFirewood(true);
+		}
+	}
+	
+	
+	public void moneyEarnedFromMonsters(int counter, Monster m) {
+		System.out.println(counter + " adet " + m.getName() + " öldürdün. Kazandığın para: " + (m.getMoney()*counter));
+		getPlayer().setMoney((getPlayer().getMoney()+m.getMoney()*counter));
+		System.out.println("💲 Mevcut paran: " + getPlayer().getMoney());
+	}
+	
+	public void combat(Monster m) throws Exception {
+		
+		System.out.println("⚔️⚔⚔⚔️⚔⚔⚔️⚔⚔⚔️⚔⚔⚔️⚔⚔⚔️⚔⚔⚔️⚔⚔⚔️⚔⚔");
+		System.out.println();
+		System.out.println("Canavarın mevcut canı: " + m.getHealthy());
+		System.out.println("Senin mevcut canın: " + getPlayer().getHealthy());
+		scanner.nextLine();
+
+		while (m.getHealthy()>0&&getPlayer().getHealthy()>0) {
+			System.out.print(getPlayer().getName() + " saldırıyor   >>>>>>>>>>");
+			m.setHealthy(m.getHealthy()-getPlayer().getDamage());
+			if(m.getHealthy()<=0) {
+				System.out.print(" Canavarın kalan canı: 0");
+				System.out.println("   ----------   Senin kalan canın: " + getPlayer().getHealthy());
+				scanner.nextLine();
+			}else {
+				System.out.print(" Canavarın kalan canı: " + m.getHealthy());
+				System.out.println("   ----------   Senin kalan canın: " + getPlayer().getHealthy());
+				scanner.nextLine();
+			}
+			
+			if(m.getHealthy()<=0) {
+				System.out.print("TEBRİKLER");
+				break;
+			}
+			
+			System.out.print(m.getName() + " saldırıyor <<<<<<<<<<");
+			System.out.print(" Canavarın kalan canı: " + m.getHealthy());
+			getPlayer().setHealthy(getPlayer().getHealthy()-m.getDamage());
+			System.out.println("   ----------   Senin kalan canın: " + getPlayer().getHealthy());
+			scanner.nextLine();
+			
+			if (getPlayer().getHealthy()<=0) {
+				System.out.println("!!!!!!!!!!!!!!!!     💀    ÖLDÜNÜZ     💀    !!!!!!!!!!!!!!!!");
+				throw new Exception("ÖLDÜNÜZ. OYUN BİTTİ");
+			}
+		}
+	}
+	
+	
+}

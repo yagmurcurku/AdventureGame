@@ -1,0 +1,150 @@
+package location;
+
+import java.util.Scanner;
+
+import location.BattleLoc.Cave;
+import location.normalLoc.SafeHouse;
+import location.normalLoc.ToolStore;
+import monster.Monster;
+import monster.Zombie;
+import player.Inventory;
+import player.Player;
+
+public abstract class Location {
+
+	Player player;	
+	String locationName;
+	int locationNumber;
+	//1 : güvenli bölge
+	//2 : eşya mağazası
+	//3 : savaş alanı
+
+	public Location() {
+		super();
+	}
+
+	public Location(Player player) {
+		this.player = player;
+	}
+	
+	
+	
+	public Player getPlayer() {    
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+
+	public String getLocationName() {
+		return locationName;
+	}
+
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
+	}
+	
+
+	public int getLocationNumber() {
+		return locationNumber;
+	}
+
+	public void setLocationNumber(int locationNumber) {
+		this.locationNumber = locationNumber;
+	}
+	
+	
+	public abstract void onLocation() throws Exception;
+	Scanner scanner = new Scanner(System.in);
+
+	
+	public void selectLocation() throws Exception {
+
+		scanner.nextLine();
+		System.out.println("Hangi bölgeye gitmek istiyorsun ?");
+		System.out.println("🏠 1: Güvenli bölge");
+		System.out.println("💎 2: Eşya mağazası");
+		System.out.println("⚔ 3: Savaş alanı");
+		
+		int location = scanner.nextInt();
+		
+		switch (location) {
+		
+		//******GÜVENLİ BÖLGE***********
+		case 1: {
+			SafeHouse safeHouse = new SafeHouse(player);
+			safeHouse.onLocation();
+			break;
+		}
+		
+		//******EŞYA MAĞAZASI***********
+		case 2: {
+			ToolStore store = new ToolStore(player);
+			store.onLocation();
+			break;
+		}
+		
+		//******SAVAŞ ALANI***********
+		case 3: {
+			setLocationName("savaş alanı");
+			setLocationNumber(3);
+			
+			System.out.println();
+			System.out.println("Burası savaş alanı. Kendini koru :)");
+			System.out.println("Mağarada zombiler 🧟, Ormanda vampirler 🧛🏻, Nehirde ayılar olabilir 🐻!!!");
+			System.out.println();
+			
+			selectBattleLocation();
+			break;
+		}
+		default:
+			System.out.println("YANLIŞ ALAN SEÇİMİ YAPTINIZ. LÜTFEN TEKRAR DENEYİN");
+			this.selectLocation();
+			//throw new Exception("Yanlış alan seçimi !!!");
+		}
+		
+	}
+	
+	
+	public void selectBattleLocation() throws Exception {
+		System.out.println("Mağarada savaşmak istiyorsan 1'e bas");
+		System.out.println("Ormanda savaşmak istiyorsan 2'ye bas");
+		System.out.println("Nehirde savaşmak istiyorsan 3'e bas");
+		int battleLocation = scanner.nextInt();
+		
+		
+		switch (battleLocation) {
+		case 1: {
+			Monster zombie = new Zombie();
+			Cave cave = new Cave(player, zombie);
+			cave.onLocation();
+			break;
+		}
+		case 2: {
+			//Forest forest = new Forest(player, name, monster);
+			//forest.onLocation();
+		}
+		case 3: {
+			//River river = new River(player, name, monster);
+			//river.onLocation();
+		}
+		default:
+			// ???????????????????????????
+			System.out.println("Yanlış alan seçimi yaptınız. Lütfen tekrar deneyin");
+			selectBattleLocation();
+			break;
+		}
+		
+	}
+	
+	
+	
+	
+	
+}
+
+
+
+

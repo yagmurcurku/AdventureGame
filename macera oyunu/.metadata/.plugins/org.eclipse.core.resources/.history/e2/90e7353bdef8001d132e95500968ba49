@@ -1,0 +1,84 @@
+package game;
+
+import java.util.Scanner;
+
+import location.Location;
+import player.Player;
+
+public class Game {
+
+	Player player;
+	Location location;
+	
+	public Game() {
+	}
+	
+	public Game(Player player, Location location) {
+		this.player = player;
+		this.location = location;
+	}
+
+	Scanner scanner = new Scanner(System.in);
+
+	public void start() throws Exception {
+		
+		
+		System.out.println("⚔️⚔⚔ SAVAŞ OYUNUNA HOŞGELDİN ⚔️⚔⚔");
+		scanner.nextLine();
+		System.out.println("Oyunu kazanmak için mağaradan yemek, ormandan odun ve nehirden su toplamalısın");
+		System.out.println("Eğer ölmeden tüm araçları toplayabilirsen oyunu başarılı bir şekilde bitirmiş olacaksın");
+		scanner.nextLine();
+		System.out.println("Fakat bunları toplamak için savaş alanına gidip karşına çıkan canavarlarla savaşman gerekecek 😈");
+		scanner.nextLine();
+		
+		//KARAKTER SEÇİMİ
+		Player player = new Player();
+		player.selectChar();
+		//this.player.selectChar();			neden bu şekilde kullanamıyorum?
+		
+		
+		
+		//BÖLGE SEÇİMİ
+		for(int i=player.getHealthy(); i>0;) {
+			
+			//String locationName = "";
+			Location location = new Location(player) {
+				
+				@Override
+				public void onLocation() throws Exception {
+					// TODO Auto-generated method stub
+					
+				}
+			};
+			
+			location.selectLocation();
+			//this.location.selectLocation();		neden bu şekilde kullanamıyorum?
+			
+			
+			//DÜZENLENECEK, TÜMÜNÜ KAZANDIĞINDA OYUN BAŞARILI OLARAK SONLANDIRILACAK
+			if(player.getInventory().isFood()&&player.getInventory().isWater()&&player.getInventory().isFirewood()) {
+				System.out.println("TEBRİKLER ! TÜM MALZEMELERİ TOPLADINIZ");
+				throw new Exception("OYUNU KAZANDINIZ");
+			}
+			
+			/*
+			if(player.getInventory().isFood()) {
+				System.out.println("YEMEK KAZANILDI");
+			}else if (player.getInventory().isFirewood()) {
+				System.out.println("ATEŞ KAZANILDI");
+			}else if (player.getInventory().isWater()) {
+				System.out.println("SU KAZANILDI");
+			}else if (player.getInventory().isFood() && player.getInventory().isFirewood() && player.getInventory().isWater()) {
+				System.out.println("TÜM MALZEMELER KAZANILDI");
+			}
+			*/
+			
+			
+		}
+		
+		System.out.println("GGGAAAMMMEEE OOOVVVVEEERRR");
+		
+	}
+	
+	
+}
